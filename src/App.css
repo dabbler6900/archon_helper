@@ -1,0 +1,690 @@
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0a0a14;
+  --surface: #12121f;
+  --surface-2: #1a1a2e;
+  --border: #2a2a4a;
+  --text: #e0e0f0;
+  --text-dim: #8888aa;
+  --accent: #7c6aef;
+  --accent-bg: rgba(124, 106, 239, 0.1);
+}
+
+/* ─── App Shell ─────────────────────────────────────────────── */
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.app-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.header-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.header-btn:hover {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.export-btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.export-btn:hover {
+  background: #6a5ad9;
+}
+
+/* ─── Hub View ──────────────────────────────────────────────── */
+.hub-view {
+  flex: 1;
+  padding: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── Decision Guide ────────────────────────────────────────── */
+.decision-guide {
+  margin-bottom: 40px;
+}
+
+.guide-header {
+  margin-bottom: 24px;
+}
+
+.guide-header h2 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.guide-header p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.guide-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.guide-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.guide-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(124, 106, 239, 0.15);
+}
+
+.guide-card-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.guide-card-content h3 {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.guide-card-content p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* ─── Phase Nav ─────────────────────────────────────────────── */
+.phase-nav {
+  margin: 36px 0 24px;
+}
+
+.phase-nav h2 {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.phase-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.phase-nav-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.phase-nav-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* ─── Quick Search ──────────────────────────────────────────── */
+.quick-search {
+  position: relative;
+  margin-top: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.search-result-item:hover {
+  background: var(--surface-2);
+}
+
+.result-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.result-phase {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ─── Browse View ───────────────────────────────────────────── */
+.browse-view {
+  flex: 1;
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.browse-header {
+  margin-bottom: 28px;
+}
+
+.browse-header h2 {
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 12px 0;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.phase-filter-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.chip:hover {
+  opacity: 0.8;
+}
+
+.search-info {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.workflows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* ─── Workflow Card ──────────────────────────────────────────── */
+.workflow-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.workflow-card:hover {
+  border-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.card-header {
+  padding: 16px 18px 12px;
+  border-bottom: 2px solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+
+.node-count {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: var(--surface-2);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.card-description {
+  padding: 12px 18px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.card-footer {
+  padding: 10px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phase-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.complexity-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ─── Workflow Detail ────────────────────────────────────────── */
+.workflow-detail {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.detail-header {
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  background: var(--surface);
+}
+
+.detail-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.detail-name {
+  font-size: 1.5rem;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+}
+
+.phase-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.detail-description {
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.detail-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.detail-card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.detail-card p {
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.detail-card ul {
+  list-style: none;
+}
+
+.detail-card li {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.triggers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trigger-tag {
+  font-size: 0.78rem;
+  background: var(--surface-2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+}
+
+.use-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.use-btn:hover {
+  opacity: 0.85;
+}
+
+/* ─── Tree View ─────────────────────────────────────────────── */
+.tree-view {
+  flex: 1;
+  padding: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.decision-tree {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.tree-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tree-nav-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+}
+
+.tree-nav-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.tree-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tree-breadcrumb {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+.tree-current {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.tree-question {
+  margin-bottom: 28px;
+}
+
+.tree-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tree-question h3 {
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.tree-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.tree-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.tree-option:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.option-emoji {
+  font-size: 1.6rem;
+}
+
+.option-label {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.tree-workflow-preview {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.tree-workflow-preview h4 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+  margin-bottom: 8px;
+}
+
+.tree-workflow-preview p {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+}
+
+.preview-meta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.use-workflow-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.use-workflow-btn:hover {
+  opacity: 0.85;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.app-footer {
+  padding: 16px 32px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.app-footer p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hub-view, .browse-view, .tree-view, .workflow-detail {
+    padding: 20px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-cards {
+    grid-template-columns: 1fr;
+  }
+}
